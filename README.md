@@ -1,4 +1,4 @@
-# planetAi
+
 This web application allow users to interact with their documents like pdfs by asking questions and getting respones related to their questions. 
 
 ## Features
@@ -33,5 +33,5 @@ At this point following service would be up and running:
 |backend|:8000|
 
 ## Demo Video 
-[Watch the demo video](https://drive.google.com/file/d/1yNrfGfc_vL9xrsuLVNhGoGtfSUMwTe41/view?usp=sharing) 
+[Watch the demo video](https://drive.google.com/file/d/1AXV1_8Bwvm18hIjAwnK8ljZYt9lfqADi/view?usp=drive_link) 
 
