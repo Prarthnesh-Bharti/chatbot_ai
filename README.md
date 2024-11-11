@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 # Planet AI Web Application
+=======
+
+This web application allow users to interact with their documents like pdfs by asking questions and getting respones related to their questions. 
+>>>>>>> ce3353a98c121de81f789cc555593af5b76c5a1b
 
 ## Overview
 
@@ -30,6 +35,7 @@ Follow these steps to set up the application locally:
 
 1. **Install Dependencies**:
 
+<<<<<<< HEAD
    - Navigate to the `planet` directory and run:
      ```bash
      npm install
@@ -38,6 +44,10 @@ Follow these steps to set up the application locally:
      ```bash
      pip install -r requirements.txt
      ```
+=======
+## Demo Video 
+[Watch the demo video](https://drive.google.com/file/d/1AXV1_8Bwvm18hIjAwnK8ljZYt9lfqADi/view?usp=drive_link) 
+>>>>>>> ce3353a98c121de81f789cc555593af5b76c5a1b
 
 2. **Configure Environment Variables**:
 
