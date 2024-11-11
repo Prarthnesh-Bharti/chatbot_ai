@@ -39,7 +39,7 @@ const Chatbot = () => {
     
   const handleKey=(e)=>{
     //  changing question state when enter is pressed on input
-    if(e.key=='Enter'){
+    if(e.key==='Enter'){
       setQuestion(message);
     }
   }

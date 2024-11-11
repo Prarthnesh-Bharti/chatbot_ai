@@ -1,6 +1,5 @@
 from typing import Union
-
-from fastapi import FastAPI,File,UploadFile
+from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
@@ -13,67 +12,72 @@ from llama_index.core import (
 )
 from pydantic import BaseModel
 
-# inititating an app to handle routes
+# Initiating an app to handle routes
 app = FastAPI()
 
-# to load evnironment variables
+# Load environment variables
 load_dotenv()
 
-# setting OPENAI_API_KEY
+# Setting OPENAI_API_KEY
 os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 
-# setting origins for cors
-origins=[
+# Setting origins for CORS
+origins = [
     "http://localhost:3000"
 ]
 
-# setting cors 
+# Setting CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins = origins,
-    allow_credentials = True,
-    allow_methods = ["GET","POST"],
-    allow_headers =["*"]
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["GET", "POST"],
+    allow_headers=["*"]
 )
 
+# Directory for persistent storage
 PERSIST_DIR = "./storage"
 if not os.path.exists(PERSIST_DIR):
-    # loading the documents data from uploaded_files folder
+    # Loading the documents data from uploaded_files folder
     documents = SimpleDirectoryReader("uploaded_files").load_data()
-    # indexing the documents data
+    # Indexing the documents data
     index = VectorStoreIndex.from_documents(documents)
-    # storing the index for later use
+    # Storing the index for later use
     index.storage_context.persist(persist_dir=PERSIST_DIR)
 else:
-    # loading the existing index
+    # Loading the existing index
     storage_context = StorageContext.from_defaults(persist_dir=PERSIST_DIR)
     index = load_index_from_storage(storage_context)
 
-# setting a query engine to query through indexes
+# Setting a query engine to query through indexes
 query_engine = index.as_query_engine()
 
-#  pdf upload route
+# Ensure the uploaded_files directory exists
+if not os.path.exists("uploaded_files"):
+    os.makedirs("uploaded_files")
+
+# PDF upload route
 @app.post("/upload")
-async def upload(file:UploadFile = File(...)):
+async def upload(file: UploadFile = File(...)):
     try:
-        # contents of the file are read and file is stored in uploaded_files folder
+        # Read contents of the file and store it in uploaded_files folder
         contents = await file.read()
-        with open(f'uploaded_files/{file.filename}','wb') as f:
+        with open(f'uploaded_files/{file.filename}', 'wb') as f:
             f.write(contents)
-        return JSONResponse(content={"message":"File uploaded Successfully"})
+        return JSONResponse(content={"message": "File uploaded successfully"})
     except Exception as e:
-        return JSONResponse(content={"message":str(e)},status_code=500)
+        return JSONResponse(content={"message": str(e)}, status_code=500)
 
-# model for query
+# Model for query
 class Query(BaseModel):
-    text:str
+    text: str
 
-# post route for getting queries from frontend
+# Post route for getting queries from frontend
 @app.post("/messages")
-async def query(q:Query):
+async def query(q: Query):
     if not q.text:
         raise HTTPException(status_code=422, detail="Message text cannot be empty")
-    print(q)
-    # getting response from query engine related to the query 
+    
+    # Getting response from query engine related to the query 
     response = query_engine.query(q.text)
-    return {"response":response}
+    return {"response": response}

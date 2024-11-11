@@ -1,37 +1,69 @@
-# planetAi
-This web application allow users to interact with their documents like pdfs by asking questions and getting respones related to their questions. 
+# Planet AI Web Application
 
-## Features
-- Uploading PDF files.
-- Asking questions
+## Overview
 
+The Planet AI web application empowers users to interact with their PDF documents by asking questions and receiving relevant answers. This innovative solution leverages advanced natural language processing techniques to enhance document accessibility and understanding.
+
+## Key Features
+
+- **PDF Uploading**: Seamlessly upload PDF files for interaction.
+- **Interactive Q&A**: Pose questions related to the content of your PDFs and receive instant responses.
 
 ## Architecture
-The project contains the following folders and services
-- ```planet```: Frontend developed using React.js
-- ```backend```: Backend developed using FASTAPI
-- ```NLP Processing```: NLP processings are handled using LLamaIndex
-- ```Storage```:Used Local file system to store pdfs
 
+The project is organized into several components, each serving a specific purpose:
 
-**Tech used to make scalable architecture -**
-- **React.js** - React's component-based structure promotes reusability and modularity, making the codebase easier to maintain and scale.
-- **FASTAPI** - Built on top of Starlette for the web parts and Pydantic for the data parts, FastAPI is designed to be one of the fastest Python web frameworks.
-- **LLamaIndex** - Provides sophisticated natural language processing tools, facilitating the development of intelligent applications that understand and process human language.
+- **Frontend (`planet`)**: Developed using **React.js**, providing a dynamic and responsive user interface.
+- **Backend (`backend`)**: Built with **FastAPI**, ensuring high performance and rapid response times.
+- **NLP Processing**: Utilizes **LLamaIndex** for sophisticated natural language processing capabilities.
+- **Storage**: Employs the local file system for efficient PDF storage.
+
+### Technologies for Scalable Architecture
+
+- **React.js**: Its component-based architecture promotes reusability and modularity, making the codebase easier to maintain and scale.
+- **FastAPI**: A modern, fast (high-performance) web framework for building APIs with Python, built on Starlette and Pydantic.
+- **LLamaIndex**: Offers advanced natural language processing tools to facilitate the development of intelligent applications that comprehend and process human language.
 
 ## Setup Guide
-1. Run ```npm install``` in planet and ```pip install``` in Backend.
-2. Make .env file in Backend.
-    - ```backend``` :OPENAI_API_KEY
 
-4. Run ```npm start``` in planet and ```fastapi dev main.py``` in backend
+Follow these steps to set up the application locally:
 
-At this point following service would be up and running: 
-|Service|PORT|
-|------|------|
-|caretaker|:3000|
-|backend|:8000|
+1. **Install Dependencies**:
 
-## Demo Video 
-[Watch the demo video](https://drive.google.com/file/d/1yNrfGfc_vL9xrsuLVNhGoGtfSUMwTe41/view?usp=sharing) 
+   - Navigate to the `planet` directory and run:
+     ```bash
+     npm install
+     ```
+   - Then, navigate to the `backend` directory and run:
+     ```bash
+     pip install -r requirements.txt
+     ```
 
+2. **Configure Environment Variables**:
+
+   - Create a `.env` file in the `backend` directory and add your OpenAI API key:
+     ```
+     OPENAI_API_KEY=your_api_key_here
+     ```
+
+3. **Start the Services**:
+   - In the `planet` directory, run:
+     ```bash
+     npm start
+     ```
+   - In the `backend` directory, run:
+     ```bash
+     uvicorn main:app --reload
+     ```
+
+At this point, the following services will be operational:
+
+| Service  | Port  |
+| -------- | ----- |
+| Frontend | :3000 |
+| Backend  | :8000 |
+
+## Demo Video
+
+For a visual demonstration of the application, please watch the following video:  
+[Watch the demo video](https://drive.google.com/file/d/1AXV1_8Bwvm18hIjAwnK8ljZYt9lfqADi/view?usp=drive_link)
