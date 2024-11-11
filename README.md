@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-# Planet AI Web Application
-=======
-
-This web application allow users to interact with their documents like pdfs by asking questions and getting respones related to their questions. 
->>>>>>> ce3353a98c121de81f789cc555593af5b76c5a1b
 
 ## Overview
 
